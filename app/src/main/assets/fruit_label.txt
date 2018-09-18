@@ -1,0 +1,81 @@
+apple braeburn
+apple golden 1
+apple golden 2
+apple golden 3
+apple granny smith
+apple red 1
+apple red 2
+apple red 3
+apple red delicious
+apple red yellow
+apricot
+avocado
+avocado ripe
+banana
+banana red
+cactus fruit
+cantaloupe 1
+cantaloupe 2
+carambula
+cherry 1
+cherry 2
+cherry rainier
+cherry wax black
+cherry wax red
+cherry wax yellow
+clementine
+cocos
+dates
+granadilla
+grape pink
+grape white
+grape white 2
+grapefruit pink
+grapefruit white
+guava
+huckleberry
+kaki
+kiwi
+kumquats
+lemon
+lemon meyer
+limes
+lychee
+mandarine
+mango
+maracuja
+melon piel de sapo
+mulberry
+nectarine
+orange
+papaya
+passion fruit
+peach
+peach flat
+pear
+pear abate
+pear monster
+pear williams
+pepino
+physalis
+physalis with husk
+pineapple
+pineapple mini
+pitahaya red
+plum
+pomegranate
+quince
+rambutan
+raspberry
+salak
+strawberry
+strawberry wedge
+tamarillo
+tangelo
+tomato 1
+tomato 2
+tomato 3
+tomato 4
+tomato cherry red
+tomato maroon
+walnut
