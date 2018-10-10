@@ -36,7 +36,9 @@ import android.os.Trace;
 import android.util.Size;
 import android.view.KeyEvent;
 import android.view.Surface;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import java.nio.ByteBuffer;
 import stev.echanson.classes.ImageUtils;
@@ -78,11 +80,21 @@ public abstract class CameraActivity extends Activity
 
     setContentView(R.layout.activity_camera);
 
+    FrameLayout cameraLayout = this.findViewById(R.id.container);
+    cameraLayout.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        saveImageOnClick(v);
+      }
+    });
+
     if (hasPermission()) {
       setFragment();
     } else {
       requestPermission();
     }
+
+
   }
 
   private byte[] lastPreviewFrame;
@@ -455,4 +467,5 @@ public abstract class CameraActivity extends Activity
   protected abstract void onPreviewSizeChosen(final Size size, final int rotation);
   protected abstract int getLayoutId();
   protected abstract Size getDesiredPreviewFrameSize();
+  protected abstract void saveImageOnClick(View view);
 }

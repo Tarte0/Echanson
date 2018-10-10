@@ -5,4 +5,5 @@
     <color name="colorAccent">#FEBC38</color>
     <color name="colorGhost">#D8C684</color>
     <color name="colorOther">#697F98</color>
+    <color name="colorDarkAlpha">#70000000</color>
 </resources>

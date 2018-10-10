@@ -51,7 +51,7 @@ public class RecognitionScoreView extends View implements ResultsView {
     fgPaint.setTextSize(textSizePx);
 
     bgPaint = new Paint();
-    bgPaint.setColor(getResources().getColor(R.color.colorPrimaryDark));
+    bgPaint.setColor(getResources().getColor(R.color.colorPrimary));
   }
 
   @Override
@@ -66,7 +66,7 @@ public class RecognitionScoreView extends View implements ResultsView {
     String text;
     float textWidth = 0;
     int x;
-    int y = (int) (fgPaint.getTextSize() * 1.5f);
+    int y;
 
     canvas.drawPaint(bgPaint);
 

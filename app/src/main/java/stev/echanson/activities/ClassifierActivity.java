@@ -25,11 +25,15 @@ import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.View;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.Vector;
 import stev.echanson.classes.BorderedText;
 import stev.echanson.classes.Classifier;
@@ -180,6 +184,14 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
             readyForNextImage();
           }
         });
+  }
+
+  @Override
+  protected void saveImageOnClick(View view) {
+    Date currentTime = Calendar.getInstance().getTime();
+    String id = UUID.randomUUID().toString();
+    //store in bdd
+    ImageUtils.saveBitmap(croppedBitmap, id+".png");
   }
 
   @Override

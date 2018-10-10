@@ -10,8 +10,7 @@
 
     <style name="BottomNavigation">
         <item name="android:background">@color/colorPrimary</item>
-        <item name="itemIconTint">@android:color/white</item>
-        <item name="itemTextColor">@android:color/white</item>
+
     </style>
 
     <style name="ToolBar">
