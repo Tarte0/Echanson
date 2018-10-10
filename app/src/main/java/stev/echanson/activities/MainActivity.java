@@ -10,13 +10,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import stev.echanson.R;
-import stev.echanson.classes.Classifier;
-import stev.echanson.views.LeftActivityViewPager;
 import stev.echanson.fragments.AnalyticsFragment;
 import stev.echanson.fragments.GalleryFragment;
 import stev.echanson.fragments.ProfileFragment;
@@ -27,23 +29,9 @@ public class MainActivity extends AppCompatActivity {
     GalleryFragment gf;
     AnalyticsFragment af;
 
-    // -1 - left, 0 - center, 1 - right
-    private int scroll = 0;
-    // set only on `onPageSelected` use it in `onPageScrolled`
-    // if currentPage < page - we swipe from left to right
-    // if currentPage == page - we swipe from right to left  or centered
-    private int currentPage = 0;
-    // if currentPage < page offset goes from `screen width` to `0`
-    // as you reveal right fragment.
-    // if currentPage == page , offset goes from `0` to `screen width`
-    // as you reveal right fragment
-    // You can use it to see
-    //if user continue to reveal next fragment or moves it back
-    private int currentOffset = 0;
-    // behaves similar to offset in range `[0..1)`
-    private float currentScale = 0;
-
-    private boolean isLeftActivityRunning = false;
+    LinearLayout mainLinearLayout;
+    Toolbar toolbar;
+    ImageButton toolbarCameraButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 return false;
-
             }
         });
 
@@ -81,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+
+        toolbar = findViewById(R.id.mainToolbar);
+        toolbarCameraButton = toolbar.findViewById(R.id.toolbarCameraIB);
+
+        toolbarCameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToCameraActivity(v);
+            }
+        });
 
     }
 
@@ -127,14 +124,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void goToCameraActivity() {
-        Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+    public void goToCameraActivity(View v) {
+        Intent intent = new Intent(v.getContext(), ClassifierActivity.class);
         startActivity(intent);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        this.isLeftActivityRunning = false;
-    }
 }

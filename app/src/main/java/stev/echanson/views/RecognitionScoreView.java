@@ -17,13 +17,17 @@ package stev.echanson.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
 
+import stev.echanson.R;
 import stev.echanson.classes.Classifier.Recognition;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -32,6 +36,8 @@ public class RecognitionScoreView extends View implements ResultsView {
   private List<Recognition> results;
   private final float textSizePx;
   private final Paint fgPaint;
+  private float[] charWidths = new float[100];
+  private float[] textCharWidths;
   private final Paint bgPaint;
 
   public RecognitionScoreView(final Context context, final AttributeSet set) {
@@ -41,10 +47,11 @@ public class RecognitionScoreView extends View implements ResultsView {
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
     fgPaint = new Paint();
+    fgPaint.setColor(Color.parseColor("#ffffff"));
     fgPaint.setTextSize(textSizePx);
 
     bgPaint = new Paint();
-    bgPaint.setColor(0xcc4285f4);
+    bgPaint.setColor(getResources().getColor(R.color.colorPrimaryDark));
   }
 
   @Override
@@ -55,16 +62,37 @@ public class RecognitionScoreView extends View implements ResultsView {
 
   @Override
   public void onDraw(final Canvas canvas) {
-    final int x = 10;
+
+    String text;
+    float textWidth = 0;
+    int x;
     int y = (int) (fgPaint.getTextSize() * 1.5f);
 
     canvas.drawPaint(bgPaint);
 
+      // we measure the text width to center it
     if (results != null) {
       for (final Recognition recog : results) {
-        canvas.drawText(recog.getTitle() + ": " + recog.getConfidence(), x, y, fgPaint);
-        y += fgPaint.getTextSize() * 1.5f;
+        textWidth = 0;
+        text = getText(recog);
+        for(int i=0; i<text.length(); i++) {
+          charWidths[i] = text.charAt(i);
+        }
+        textCharWidths = Arrays.copyOfRange(charWidths, 0, text.length());
+        fgPaint.getTextWidths(text, 0, (text.length()-1)%100,
+                  textCharWidths);
+        for(int i=0; i<text.length(); ++i){
+          textWidth += textCharWidths[i];
+        }
+        x = (int) (canvas.getWidth()/2 - textWidth/2);
+        y = (int) (canvas.getHeight()/2 + fgPaint.getTextSize()/2);
+        canvas.drawText(getText(recog), x, y, fgPaint);
+
       }
     }
+  }
+
+  String getText(Recognition recog){
+    return recog.getTitle() + ": " + (int)(recog.getConfidence()*100) + " %";
   }
 }

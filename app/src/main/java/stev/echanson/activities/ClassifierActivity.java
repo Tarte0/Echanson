@@ -148,7 +148,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
         new DrawCallback() {
           @Override
           public void drawCallback(final Canvas canvas) {
-            renderDebug(canvas);
+            //renderDebug(canvas);
           }
         });
   }
@@ -209,47 +209,6 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
           lines.add(line);
         }
       }
-
-      /*lines.add("Frame: " + previewWidth + "x" + previewHeight);
-      lines.add("Crop: " + copy.getWidth() + "x" + copy.getHeight());
-      lines.add("View: " + canvas.getWidth() + "x" + canvas.getHeight());
-      lines.add("Rotation: " + sensorOrientation);
-      lines.add("Inference time: " + lastProcessingTimeMs + "ms");*/
-      String in = new String();
-      JSONObject reader = null;
-      /*try {
-        String json = "{\n" +
-                "  \"calories\": \"231\",\n" +
-                "  \"protein\": \"12.7\",\n" +
-                "  \"totalFat\": \"7.5\",\n" +
-                "  \"carbohydrate\": \"31\",\n" +
-                "  \"sodium\": \"31\",\n" +
-                "  \"saturatedFat\": \"49.8\",\n" +
-                "  \"Cholesterol\": \"109\",\n" +
-                "  \"sugar\": \"100\",\n" +
-                "  \"calcium\": \"010\",\n" +
-                "  \"iron\": \"100\",\n" +
-                "  \"potassium\": \"0\",\n" +
-                "  \"vitaminC\": \"0\",\n" +
-                "  \"vitaminE\": \"2.7\",\n" +
-                "  \"vitaminD\": \"0.7\"\n" +
-                "}";
-        reader = new JSONObject(in);
-        JSONObject sys  = reader.getJSONObject(json);
-        String calories = sys.getString("calories");
-        String protein = sys.getString("protein");
-        String sugar = sys.getString("sugar");
-        lines.add("calories : " + calories);
-        lines.add("protein : " + protein);
-        lines.add("sugar : " + sugar);
-
-      } catch (JSONException e) {
-          lines.add("cpt");
-        e.printStackTrace();
-      }*/
-      lines.add("calories : 231");
-      lines.add("protein : 12.7");
-      lines.add("sugar : 2.8");
       borderedText.drawLines(canvas, 10, canvas.getHeight() - 10, lines);
     }
   }

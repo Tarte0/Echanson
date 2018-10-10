@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="?attr/actionBarTheme"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:menu="@menu/toolbar_items"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ToolBar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/toolbarCameraIB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:cropToPadding="true"
+            android:contentDescription="camera"
+            android:src="@drawable/camera"
+            android:tint="@android:color/white"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>
