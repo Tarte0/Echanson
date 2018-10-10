@@ -26,6 +26,9 @@ import android.os.SystemClock;
 import android.util.Size;
 import android.util.TypedValue;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 import java.util.Vector;
 import stev.echanson.classes.BorderedText;
@@ -74,9 +77,9 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   private static final String OUTPUT_NAME = "final_result"; //not working ? "final_result" : "output"
 
 
-  private static final String MODEL_FILE = "file:///android_asset/food_graph.pb";
+  private static final String MODEL_FILE = "file:///android_asset/test_graph.pb";
   private static final String LABEL_FILE =
-      "file:///android_asset/food_labels.txt";
+      "file:///android_asset/test_labels.txt";
 
 
   private static final boolean MAINTAIN_ASPECT = true;
@@ -207,12 +210,46 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
         }
       }
 
-      lines.add("Frame: " + previewWidth + "x" + previewHeight);
+      /*lines.add("Frame: " + previewWidth + "x" + previewHeight);
       lines.add("Crop: " + copy.getWidth() + "x" + copy.getHeight());
       lines.add("View: " + canvas.getWidth() + "x" + canvas.getHeight());
       lines.add("Rotation: " + sensorOrientation);
-      lines.add("Inference time: " + lastProcessingTimeMs + "ms");
+      lines.add("Inference time: " + lastProcessingTimeMs + "ms");*/
+      String in = new String();
+      JSONObject reader = null;
+      /*try {
+        String json = "{\n" +
+                "  \"calories\": \"231\",\n" +
+                "  \"protein\": \"12.7\",\n" +
+                "  \"totalFat\": \"7.5\",\n" +
+                "  \"carbohydrate\": \"31\",\n" +
+                "  \"sodium\": \"31\",\n" +
+                "  \"saturatedFat\": \"49.8\",\n" +
+                "  \"Cholesterol\": \"109\",\n" +
+                "  \"sugar\": \"100\",\n" +
+                "  \"calcium\": \"010\",\n" +
+                "  \"iron\": \"100\",\n" +
+                "  \"potassium\": \"0\",\n" +
+                "  \"vitaminC\": \"0\",\n" +
+                "  \"vitaminE\": \"2.7\",\n" +
+                "  \"vitaminD\": \"0.7\"\n" +
+                "}";
+        reader = new JSONObject(in);
+        JSONObject sys  = reader.getJSONObject(json);
+        String calories = sys.getString("calories");
+        String protein = sys.getString("protein");
+        String sugar = sys.getString("sugar");
+        lines.add("calories : " + calories);
+        lines.add("protein : " + protein);
+        lines.add("sugar : " + sugar);
 
+      } catch (JSONException e) {
+          lines.add("cpt");
+        e.printStackTrace();
+      }*/
+      lines.add("calories : 231");
+      lines.add("protein : 12.7");
+      lines.add("sugar : 2.8");
       borderedText.drawLines(canvas, 10, canvas.getHeight() - 10, lines);
     }
   }

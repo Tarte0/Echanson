@@ -1,0 +1,18 @@
+{
+"pizza" : {
+  "calories": "231",
+  "protein": "12.7",
+  "totalFat": "7.5",
+  "carbohydrate": "31",
+  "sodium": "31",
+  "saturatedFat": "49.8",
+  "Cholesterol": "109",
+  "sugar": "100",
+  "calcium": "010",
+  "iron": "100",
+  "potassium": "0",
+  "vitaminC": "0",
+  "vitaminE": "2.7",
+  "vitaminD": "0.7"
+}
+}

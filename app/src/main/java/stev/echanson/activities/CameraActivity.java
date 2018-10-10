@@ -146,6 +146,7 @@ public abstract class CameraActivity extends Activity
           }
         };
     processImage();
+
   }
 
   /**
