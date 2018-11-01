@@ -22,17 +22,20 @@ import java.util.List;
 import stev.echanson.R;
 import stev.echanson.fragments.AnalyticsFragment;
 import stev.echanson.fragments.GalleryFragment;
+import stev.echanson.fragments.HealthConcernsFragment;
 import stev.echanson.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
-    ViewPager viewPager;
-    ProfileFragment pf;
-    GalleryFragment gf;
-    AnalyticsFragment af;
+    private ViewPager viewPager;
+    private ProfileFragment pf;
+    private GalleryFragment gf;
+    private AnalyticsFragment af;
+    private HealthConcernsFragment hcf;
 
-    LinearLayout mainLinearLayout;
-    Toolbar toolbar;
-    ImageButton toolbarCameraButton;
+    private LinearLayout mainLinearLayout;
+    private Toolbar toolbar;
+    private ImageButton toolbarCameraButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.bottom_nav_profile:
+                    case R.id.bottom_nav_analytics:
                         viewPager.setCurrentItem(0);
                         item.setChecked(true);
                         break;
@@ -55,8 +58,12 @@ public class MainActivity extends AppCompatActivity {
                         viewPager.setCurrentItem(1);
                         item.setChecked(true);
                         break;
-                    case R.id.bottom_nav_analytics:
+                    case R.id.bottom_nav_health:
                         viewPager.setCurrentItem(2);
+                        item.setChecked(true);
+                        break;
+                    case R.id.bottom_nav_profile:
+                        viewPager.setCurrentItem(3);
                         item.setChecked(true);
                         break;
                 }
@@ -82,16 +89,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        pf = new ProfileFragment();
-        pf.setVp(viewPager);
-        gf = new GalleryFragment();
-        gf.setVp(viewPager);
+
+
         af = new AnalyticsFragment();
         af.setVp(viewPager);
+        gf = new GalleryFragment();
+        gf.setVp(viewPager);
+        hcf = new HealthConcernsFragment();
+        hcf.setVp(viewPager);
+        pf = new ProfileFragment();
+        pf.setVp(viewPager);
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(pf, "Profile");
-        adapter.addFragment(gf, "Gallery");
         adapter.addFragment(af, "Analytics");
+        adapter.addFragment(gf, "Gallery");
+        adapter.addFragment(hcf, "Health Concerns");
+        adapter.addFragment(pf, "Profile");
         viewPager.setAdapter(adapter);
     }
 

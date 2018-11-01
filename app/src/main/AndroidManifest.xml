@@ -47,7 +47,6 @@
         <activity android:name=".activities.ClassifierActivity" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.ForgotPasswordActivity" />
-        <activity android:name=".activities.HealthParamsActivity"></activity>
     </application>
 
 </manifest>
