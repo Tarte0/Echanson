@@ -64,19 +64,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //viewPager.setCurrentItem(0);
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
 
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-
-        /*
-        this.get.setOnTouchListener(new OnSw {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });*/
 
         toolbar = findViewById(R.id.mainToolbar);
         toolbarCameraButton = toolbar.findViewById(R.id.toolbarCameraIB);
