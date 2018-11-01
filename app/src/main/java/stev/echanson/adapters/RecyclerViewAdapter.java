@@ -47,7 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View view) {
                 model.setSelected(!model.isSelected());
                 holder.view.setBackgroundColor(model.isSelected() ? mSelectedColor : mNotSelectedColor);
-                holder.textView.setTextColor(model.isSelected() ? Color.WHITE : Color.DKGRAY);
+                holder.textView.setTextColor(model.isSelected() ? Color.WHITE : Color.GRAY);
             }
         });
     }
