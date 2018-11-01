@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "883525211981",
+    "firebase_url": "https://echanson-572c4.firebaseio.com",
+    "project_id": "echanson-572c4",
+    "storage_bucket": "echanson-572c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883525211981:android:99521141dfc55d37",
+        "android_client_info": {
+          "package_name": "stev.echanson"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883525211981-22tk5d6gaddlju7p42bnteh708nrksdh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtbkW-xCn6hz_pYBiK_Bw9Bpb-skR16bc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
