@@ -31,7 +31,7 @@ public class HealthConcernsFragment extends Fragment {
         }
 
         mRecyclerView = mainView.findViewById(R.id.recycler_view_ms);
-        mAdapter = new RecyclerViewAdapter(getListData());
+        mAdapter = new RecyclerViewAdapter(getListData(), getResources().getColor(R.color.colorPrimaryDark));
         LinearLayoutManager manager = new LinearLayoutManager(mainView.getContext());
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(manager);
