@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <TextView
-        android:id="@+id/sdrfhy"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="profile"
-        />
+        android:layout_height="40dp"
+        android:id="@+id/profileTextView"
+        android:textStyle="bold"
+        android:layout_marginTop="100dp"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        style="?android:textAppearanceSmall"
+        android:layout_marginHorizontal="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Déconnexion"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@color/colorPrimaryDark"/>
+
+    <Button
+        android:id="@+id/deleteUsrButton"
+        style="?android:textAppearanceSmall"
+        android:layout_marginHorizontal="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Supprimer mon compte"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"/>
+
 </LinearLayout>
