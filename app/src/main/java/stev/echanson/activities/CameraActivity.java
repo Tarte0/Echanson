@@ -72,6 +72,8 @@ public abstract class CameraActivity extends Activity
   private Runnable postInferenceCallback;
   private Runnable imageConverter;
 
+
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     LOGGER.d("onCreate " + this);
@@ -241,7 +243,8 @@ public abstract class CameraActivity extends Activity
     handlerThread = new HandlerThread("inference");
     handlerThread.start();
     handler = new Handler(handlerThread.getLooper());
-  }
+
+    }
 
   @Override
   public synchronized void onPause() {
