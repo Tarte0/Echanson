@@ -22,8 +22,25 @@ public class FirebaseUtils {
     public static final String INGREDIENTS_PATH = METADATA_PATH + "/ingredients";
     public static final String NUTRIMENTS_PATH = METADATA_PATH + "/nutriments";
     public static final String REGIMES_PATH = METADATA_PATH + "/regimes";
+    public static final String USER_PATH = "users";
 
     public FirebaseUtils(FirebaseDatabase mDatabase) {
         database = mDatabase;
+    }
+
+    public static String getUserPath(String user){
+        return USER_PATH.concat("/").concat(user);
+    }
+
+    public static String getUserRegimesPath(String user){
+        return getUserPath(user).concat("/regimes");
+    }
+
+    public static String getUserCategoriesPath(String user){
+        return getUserPath(user).concat("/categories");
+    }
+
+    public static String getUserIngredientsPath(String user){
+        return getUserPath(user).concat("/ingredients");
     }
 }

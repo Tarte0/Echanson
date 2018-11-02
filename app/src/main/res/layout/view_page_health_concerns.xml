@@ -1,38 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#EEE">
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="regimes" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_regimes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </android.support.v7.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/regimesTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Catégories" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/noReg"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_categories"
+            android:id="@+id/regimeChipsLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:nestedScrollingEnabled="false"/>
+
+        <TextView
+            android:id="@+id/categorieTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/noCatNoIng"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/categorieChipsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:nestedScrollingEnabled="false"/>
+
+        <TextView
+            android:id="@+id/ingredientTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/noIng"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ingredientChipsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:nestedScrollingEnabled="false"/>
+
+        <Button
+            android:text="Mettre à jour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/updateHealthConcernsButton"
+            android:textColor="#FFFF"
+            android:textAllCaps="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimaryDark"
+            />
+
 
     </LinearLayout>
 
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>
