@@ -11,7 +11,7 @@
     >
 
     <ImageButton
-        android:id="@+id/next"
+        android:id="@+id/nextBottomStepper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -26,7 +26,7 @@
         style="?android:attr/borderlessButtonStyle"/>
 
     <ProgressBar
-        android:id="@+id/stepProgressBar"
+        android:id="@+id/progressBarBottomStepper"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -35,12 +35,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/next"
-        app:layout_constraintStart_toEndOf="@+id/previous"
+        app:layout_constraintEnd_toStartOf="@+id/nextBottomStepper"
+        app:layout_constraintStart_toEndOf="@+id/previousBottomStepper"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/previous"
+        android:id="@+id/previousBottomStepper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

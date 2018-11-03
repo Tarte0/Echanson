@@ -1,5 +1,6 @@
 package stev.echanson.fragments;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -32,6 +34,8 @@ import java.util.List;
 import java.util.Map;
 
 import stev.echanson.R;
+import stev.echanson.activities.ClassifierActivity;
+import stev.echanson.activities.HealthConcernsUpdateActivity;
 import stev.echanson.adapters.ChipGridViewAdapter;
 import stev.echanson.adapters.ChipRecyclerViewAdapter;
 import stev.echanson.adapters.TextChipRecyclerViewAdapter;
@@ -51,7 +55,6 @@ public class HealthConcernsFragment extends Fragment {
     private FirebaseDatabase mDatabase;
     private FirebaseUser currentFirebaseUser;
     private String userID;
-    private String userPath;
 
     private RecyclerView regimesLayout;
     private RecyclerView categoriesLayout;
@@ -64,6 +67,8 @@ public class HealthConcernsFragment extends Fragment {
     private ArrayList<Regime> regimes;
     private ArrayList<Categorie> categories;
     private ArrayList<Ingredient> ingredients;
+
+    private Button updateHealthConcernsButton;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -227,6 +232,15 @@ public class HealthConcernsFragment extends Fragment {
             }
         });
 
+
+        updateHealthConcernsButton = mainView.findViewById(R.id.updateHealthConcernsButton);
+        updateHealthConcernsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), HealthConcernsUpdateActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return mainView;
     }
