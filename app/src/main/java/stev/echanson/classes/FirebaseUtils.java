@@ -1,6 +1,7 @@
 package stev.echanson.classes;
 
-public class FirebaseUtils {
+import com.google.firebase.database.FirebaseDatabase;
 
+public class FirebaseUtils {
 
 }

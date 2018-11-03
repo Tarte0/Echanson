@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,52 +13,30 @@ import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ImageAdapter extends BaseAdapter {
     private Context context;
-    public Bitmap[] pictures = getPictures();
-
-
-
-    /*DisplayMetrics metrics = this.getResources().getDisplayMetrics();
-    int screenWidth = metrics.widthPixels;*/
-
-
-    public Bitmap[] getPictures() {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "echanson";
-
-        Bitmap[] picturesStored;
-
-
-        File directory = new File(path);
-        File[] files = directory.listFiles();
-
-        picturesStored = new Bitmap[files.length];
-
-
-        for (int i = 0; i < files.length; i++)
-        {
-            try {
-            FileInputStream streamIn = new FileInputStream(files[i]);
-
-            Bitmap bitmap = BitmapFactory.decodeStream(streamIn); //This gets the image
-
-            picturesStored[i] = bitmap;
-
-                streamIn.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return picturesStored;
-    }
+    public Bitmap[] pictures;
 
     public ImageAdapter(Context c){
-        this.context=c;
+        this.context = c;
+    }
+
+    public ImageAdapter(Context c, Bitmap[] pictures){
+        this.context = c;
+        this.pictures = pictures;
     }
 
     @Override
@@ -86,5 +65,35 @@ public class ImageAdapter extends BaseAdapter {
         imageView.setLayoutParams(new GridView.LayoutParams(width/3,width/3 ));
         return imageView;
     }
+
+
+    public Bitmap[] getPicturesFromStorage() {
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "echanson";
+
+        Bitmap[] picturesStored;
+
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+
+        picturesStored = new Bitmap[files.length];
+
+        for (int i = 0; i < files.length; i++)
+        {
+            try {
+                FileInputStream streamIn = new FileInputStream(files[i]);
+
+                Bitmap bitmap = BitmapFactory.decodeStream(streamIn); //This gets the image
+
+                picturesStored[i] = bitmap;
+
+                streamIn.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return picturesStored;
+    }
+
+
 }
 //GridLayout.LayoutParams.WRAP_CONTENT
