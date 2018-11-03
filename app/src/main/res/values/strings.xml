@@ -2,4 +2,11 @@
     <string name="app_name">Echanson</string>
     <string name="activity_name_classification">Classifier</string>
     <string name="camera_error">La camera marche pas</string>
+
+
+    <string name="full_image_text">
+        Date : %s\nNourriture : %s
+    </string>
+
+
 </resources>

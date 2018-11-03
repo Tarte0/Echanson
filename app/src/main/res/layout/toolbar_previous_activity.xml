@@ -24,7 +24,8 @@
             android:cropToPadding="true"
             android:contentDescription="previous"
             android:src="@drawable/previous_activity"
-            android:tint="@android:color/white"/>
+            android:tint="@android:color/white"
+            />
 
     </LinearLayout>
 

@@ -115,13 +115,13 @@ public class ImageUtils {
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userID = currentFirebaseUser.getUid();
 
-        DatabaseReference userImageRef = mDatabase.getReference("users/PfY3DNTX0ZZmpcUjLhRRwcUMf0C3/pictures/UID");
+        DatabaseReference userImageRef = mDatabase.getReference("users/PfY3DNTX0ZZmpcUjLhRRwcUMf0C3/pictures");
 
         String pictureB64 = convertBitmapToB64(bitmapPicture);
 
         Food food = new Food(date, nourriture, pictureB64);
 
-        userImageRef.setValue(food);
+        userImageRef.push().setValue(food);
 
     }
 

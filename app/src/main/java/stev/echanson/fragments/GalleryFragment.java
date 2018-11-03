@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import stev.echanson.R;
@@ -53,7 +54,7 @@ public class GalleryFragment extends Fragment {
         return mainView;
     }
 
-    public void updateGallery(Bitmap[] pictures){
+    public void updateGallery(final Bitmap[] pictures){
         GridView gridView = mainView.findViewById(R.id.gallery_grid_view);
         gridView.setAdapter(new ImageAdapter(this.getContext(), pictures));
 
@@ -61,11 +62,26 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent  = new Intent(getContext(), FullImageActivity.class);
+
+                /*
+                String[] picturesString = new String[pictures.length];
+
+                for(int i =0; i < pictures.length; i++){
+                    picturesString[i] = ImageUtils.convertBitmapToB64(pictures[i]);
+                }
+                intent.putExtra("pictures", picturesString);
                 intent.putExtra("id", position);
+                */
+
+                intent.putExtra("picture",food.get(position).getPicture());
+                intent.putExtra("nourriture",food.get(position).getNourriture());
+                intent.putExtra("date",food.get(position).getDate());
+
                 startActivity(intent);
             }
         });
     }
+
 
     public Bitmap[] getPicturesFromFirebase() {
         food = new ArrayList<>();
@@ -92,12 +108,14 @@ public class GalleryFragment extends Fragment {
                     food.add(new Food(date, nourriture, imgB64));
                     i++;
                 }
-                pictures = new Bitmap[i];
-                for(int j = 0; j<i; j++){
-                    pictures[j] = ImageUtils.convertB64ToBitmap(food.get(j).getPicture());
-                }
+                if (i > 0) {
+                    pictures = new Bitmap[i];
+                    for (int j = 0; j < i; j++) {
+                        pictures[j] = ImageUtils.convertB64ToBitmap(food.get(j).getPicture());
+                    }
 
-                updateGallery(pictures);
+                    updateGallery(pictures);
+                }
             }
 
             @Override
