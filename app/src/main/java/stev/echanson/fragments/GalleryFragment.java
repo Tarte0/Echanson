@@ -96,6 +96,8 @@ public class GalleryFragment extends Fragment {
                 for(int j = 0; j<i; j++){
                     pictures[j] = ImageUtils.convertB64ToBitmap(food.get(j).getPicture());
                 }
+
+                updateGallery(pictures);
             }
 
             @Override

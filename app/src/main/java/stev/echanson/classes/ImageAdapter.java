@@ -36,7 +36,7 @@ public class ImageAdapter extends BaseAdapter {
 
     public ImageAdapter(Context c, Bitmap[] pictures){
         this.context = c;
-        this.pictures = pictures;
+        this.pictures = pictures!=null ? pictures : new Bitmap[0];
     }
 
     @Override
