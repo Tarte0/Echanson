@@ -38,6 +38,7 @@ public class CategorieFragment extends Fragment {
     private View mainView;
 
     private List<Regime> regimes;
+    private List<Categorie> regimesCategories;
     private List<Categorie> categories;
 
     List<Model> categorieNamesModels;
@@ -80,13 +81,14 @@ public class CategorieFragment extends Fragment {
 
         //get categories and filter them from the regimes
         categories = new ArrayList<>();
+        categorieNamesModels = new ArrayList<>();
 
         DatabaseReference categoriesRef = database.getReference(FirebaseUtils.CATEGORIES_PATH);
         categoriesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 categories = new ArrayList<>();
-                List<Categorie> regimesCategories = new ArrayList<>();
+                regimesCategories = new ArrayList<>();
 
                 //get all categories
                 GenericTypeIndicator<List<String>> gti = new GenericTypeIndicator<List<String>>() {};
@@ -166,5 +168,32 @@ public class CategorieFragment extends Fragment {
             if(c.getName().equals(name)) return c;
         }
         return null;
+    }
+
+    public List<Categorie> getSelectedCategories(){
+        List<Categorie> selectedCategories = new ArrayList<>();
+        for (Model model : categorieNamesModels) {
+            if (model.isSelected()) {
+                selectedCategories.add(getCategorieFromName(model.getText(), categories));
+            }
+        }
+        return selectedCategories;
+    }
+
+    public List<Categorie> getRegimesCategories(){
+        return regimesCategories;
+    }
+
+    //concat selected categories and regimes categories
+    public List<Categorie> getAllSelectedCategories(){
+        List<Categorie> allCategories = getSelectedCategories();
+        List<Categorie> regimesCat = getRegimesCategories();
+
+        for(Categorie c : regimesCat){
+            //in use none should be contained, but it's to be careful anyway
+            if(!allCategories.contains(c)) allCategories.add(c);
+        }
+
+        return allCategories;
     }
 }

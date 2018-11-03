@@ -43,4 +43,16 @@ public class FirebaseUtils {
     public static String getUserIngredientsPath(String user){
         return getUserPath(user).concat("/ingredients");
     }
+
+    public static String getUserNewIngredientsPath(String userID, String ingredientName) {
+        return getUserIngredientsPath(userID).concat("/").concat(ingredientName);
+    }
+
+    public static String getUserNewRegimesPath(String userID, String regimeName) {
+        return getUserRegimesPath(userID).concat("/").concat(regimeName);
+    }
+
+    public static String getUserNewCategoriesPath(String userID, String categorieName) {
+        return getUserCategoriesPath(userID).concat("/").concat(categorieName);
+    }
 }
