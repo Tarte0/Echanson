@@ -6,5 +6,8 @@
     <color name="colorGhost">#D8C684</color>
     <color name="colorOther">#697F98</color>
     <color name="colorDarkAlpha">#70000000</color>
+    <color name="colorChipText">#444444</color>
+    <color name="colorlightAlpha">#20000000</color>
     <color name="colorDanger">#B31B1B</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

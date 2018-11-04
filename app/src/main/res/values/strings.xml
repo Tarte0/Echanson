@@ -2,6 +2,12 @@
     <string name="app_name">Echanson</string>
     <string name="activity_name_classification">Classifier</string>
     <string name="camera_error">La camera marche pas</string>
+    <string name="reg">Je suis :</string>
+    <string name="noReg">Je ne suis sous aucun régime</string>
+    <string name="catOrIng">Et je ne mange pas de :</string>
+    <string name="noCatNoIng"> </string>
+    <string name="noIng"> </string>
+    <string name="ing">Ni de :</string>
 
 
     <string name="full_image_text">
