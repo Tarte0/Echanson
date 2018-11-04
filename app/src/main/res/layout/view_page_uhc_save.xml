@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Sauvegarde en cours..."
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/saveCancelTV"
+        android:textStyle="bold"
+        android:layout_marginTop="100dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorlightAlpha"
+        android:visibility="invisible"/>
+
+    <ProgressBar
+        android:id="@+id/saveProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/saveButton"
+        style="?android:textAppearanceSmall"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Sauvegarder"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@color/colorPrimaryDark"/>
+
+    <Button
+        android:id="@+id/cancelButton"
+        style="?android:textAppearanceSmall"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Annuler"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary" />
+
+</LinearLayout>
