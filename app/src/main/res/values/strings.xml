@@ -8,4 +8,11 @@
     <string name="noCatNoIng"> </string>
     <string name="noIng"> </string>
     <string name="ing">Ni de :</string>
+
+
+    <string name="full_image_text">
+        Date : %s\nNourriture : %s
+    </string>
+
+
 </resources>
