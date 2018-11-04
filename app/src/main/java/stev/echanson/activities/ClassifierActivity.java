@@ -205,38 +205,28 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
                 });
     }
 
-    protected void saveImage(View view, String strDate, String nourritureName, Bitmap picture) {
-
-        // save image on firebase
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        String userID = currentFirebaseUser.getUid();
-
-        Food food = new Food(strDate, nourritureName, convertBitmapToB64(picture));
-
-        FirebaseUtils.saveUserImage(food, userID);
-    }
-
     protected void onClickEvent(View v) {
         if (results != null) {
-            if (results.get(0) != null) {
-                // get date
-                long time = System.currentTimeMillis();
-                String strDate = Long.toString(time);
+            if (results.size() >0) {
+                if (results.get(0) != null) {
+                    // get date
+                    long time = System.currentTimeMillis();
+                    String strDate = Long.toString(time);
 
-                // get food name
-                String nourritureName = results.get(0).getTitle();
+                    // get food name
+                    String nourritureName = results.get(0).getTitle();
 
-                Intent intent = new Intent(v.getContext(), ClassifyPopupActivity.class);
+                    Intent intent = new Intent(v.getContext(), ClassifyPopupActivity.class);
 
-                intent.putExtra("nourritureName", nourritureName);
-                intent.putExtra("date", strDate);
-                intent.putExtra("pictureB64", convertBitmapToB64(croppedBitmap));
+                    intent.putExtra("nourritureName", nourritureName);
+                    intent.putExtra("date", strDate);
+                    intent.putExtra("pictureB64", convertBitmapToB64(croppedBitmap));
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
             }
         }
     }
-
 
     @Override
     public void onSetDebug(boolean debug) {

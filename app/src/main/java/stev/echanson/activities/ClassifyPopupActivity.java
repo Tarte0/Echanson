@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ import stev.echanson.adapters.RecyclerViewAdapter;
 import stev.echanson.adapters.TextChipRecyclerViewAdapter;
 import stev.echanson.classes.Categorie;
 import stev.echanson.classes.FirebaseUtils;
+import stev.echanson.classes.Food;
 import stev.echanson.classes.Ingredient;
 import stev.echanson.classes.Model;
 import stev.echanson.classes.Nourriture;
@@ -57,6 +59,10 @@ public class ClassifyPopupActivity extends AppCompatActivity {
     private static String userID;
     private FirebaseUtils fbu;
 
+    private String nourritureName;
+    private String date;
+    private String pictureB64;
+
     private Nourriture distantNourriture;
     private NutrimentsUnits distantNutriments;
     private TextChipRecyclerViewAdapter okIngredientsRVAdapter;
@@ -76,9 +82,11 @@ public class ClassifyPopupActivity extends AppCompatActivity {
 
         Intent i = getIntent();
 
-        String date = i.getExtras().getString("date");
-        final String nourritureName = i.getExtras().getString("nourritureName").replace(' ', '_');
-        String pictureB64 = i.getExtras().getString("pictureB64");
+        date = i.getExtras().getString("date");
+        nourritureName = i.getExtras()
+                .getString("nourritureName")
+                .replace(' ', '_');
+        pictureB64 = i.getExtras().getString("pictureB64");
 
         nourritureScName = findViewById(R.id.nourritureScName);
         nourritureScEnergieValue = findViewById(R.id.nourritureScEnergieValue);
@@ -90,6 +98,9 @@ public class ClassifyPopupActivity extends AppCompatActivity {
         okNourritureScIngredientsList = findViewById(R.id.okNourritureScIngredientsList);
         warningNourritureScIngredientsList = findViewById(R.id.warningNourritureScIngredientsList);
 
+        saveButton = findViewById(R.id.pushFoodButton);
+        discardButton = findViewById(R.id.discardFoodButton);
+
         LinearLayoutManager managerOk = new LinearLayoutManager(getApplicationContext());
         LinearLayoutManager managerWar = new LinearLayoutManager(getApplicationContext());
 
@@ -98,12 +109,36 @@ public class ClassifyPopupActivity extends AppCompatActivity {
         okNourritureScIngredientsList.setLayoutManager(managerOk);
         warningNourritureScIngredientsList.setLayoutManager(managerWar);
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eat();
+            }
+        });
+
+        discardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancel();
+            }
+        });
+
         mDatabase = FirebaseDatabase.getInstance();
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userID = currentFirebaseUser.getUid();
 
         fbu = new FirebaseUtils(mDatabase);
 
+        setUp(nourritureName);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUp(nourritureName);
+    }
+
+    private void setUp(final String nourritureName) {
 
         //Fetching specific "nourriture" on FireBase
         DatabaseReference nourritureRef = mDatabase.getReference(FirebaseUtils.NOURRITURE_PATH);
@@ -311,5 +346,15 @@ public class ClassifyPopupActivity extends AppCompatActivity {
             if (i.getName().equals(name)) return i;
         }
         return null;
+    }
+
+    private void eat(){
+        Food food = new Food(date, nourritureName, pictureB64);
+        fbu.saveUserEatenFood(food, userID);
+        finish();
+    }
+
+    private void cancel(){
+        finish();
     }
 }
