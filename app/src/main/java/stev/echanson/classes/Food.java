@@ -7,7 +7,7 @@ public class Food {
 
     public Food(String date, String nourriture, String picture){
         this.date = date;
-        this. nourriture = nourriture;
+        this.nourriture = nourriture;
         this.picture = picture;
     }
 

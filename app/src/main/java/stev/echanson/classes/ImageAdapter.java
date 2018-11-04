@@ -97,4 +97,3 @@ public class ImageAdapter extends BaseAdapter {
 
 
 }
-//GridLayout.LayoutParams.WRAP_CONTENT

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 import stev.echanson.R;
 import stev.echanson.activities.FullImageActivity;
+import stev.echanson.classes.FirebaseUtils;
 import stev.echanson.classes.Food;
 import stev.echanson.classes.ImageAdapter;
 import stev.echanson.classes.ImageUtils;
@@ -37,81 +38,83 @@ public class GalleryFragment extends Fragment {
     private static FirebaseDatabase mDatabase;
     private static FirebaseUser currentFirebaseUser;
     private static String userID;
+    private FirebaseUtils fbu;
 
-    private ArrayList<Food> food;
+    private ArrayList<Food> foods;
     private Bitmap[] pictures;
 
     private boolean shouldRefreshOnResume = false;
 
+    private GridView gridView;
+    private ImageAdapter imageAdapter;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (mainView == null) {
             mainView = inflater.inflate(R.layout.view_page_gallery, null);
-            updateGallery(getPicturesFromFirebase());
         }
-        return mainView;
-    }
 
-    public void updateGallery(final Bitmap[] pictures){
-        GridView gridView = mainView.findViewById(R.id.gallery_grid_view);
-        gridView.setAdapter(new ImageAdapter(this.getContext(), pictures));
+        gridView = mainView.findViewById(R.id.gallery_grid_view);
+        imageAdapter = new ImageAdapter(this.getContext(), pictures);
+
+        gridView.setAdapter(imageAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent  = new Intent(getContext(), FullImageActivity.class);
 
-                /*
-                String[] picturesString = new String[pictures.length];
-
-                for(int i =0; i < pictures.length; i++){
-                    picturesString[i] = ImageUtils.convertBitmapToB64(pictures[i]);
-                }
-                intent.putExtra("pictures", picturesString);
-                intent.putExtra("id", position);
-                */
-
-                intent.putExtra("picture",food.get(position).getPicture());
-                intent.putExtra("nourriture",food.get(position).getNourriture());
-                intent.putExtra("date",food.get(position).getDate());
+                intent.putExtra("picture",foods.get(position).getPicture());
+                intent.putExtra("nourriture",foods.get(position).getNourriture());
+                intent.putExtra("date",foods.get(position).getDate());
 
                 startActivity(intent);
             }
         });
+
+        mDatabase = FirebaseDatabase.getInstance();
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        userID = currentFirebaseUser.getUid();
+        fbu = new FirebaseUtils(mDatabase);
+
+        updateGallery(getPicturesFromFirebase());
+
+        return mainView;
+    }
+
+    public void updateGallery(final Bitmap[] pictures){
+        imageAdapter = new ImageAdapter(getContext(), pictures);
+        gridView.setAdapter(imageAdapter);
     }
 
 
     public Bitmap[] getPicturesFromFirebase() {
-        food = new ArrayList<>();
+        foods = new ArrayList<>();
 
-        mDatabase = FirebaseDatabase.getInstance();
-
-        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        //userID = currentFirebaseUser.getUid();
-
-        DatabaseReference userImageRef = mDatabase.getReference("users/PfY3DNTX0ZZmpcUjLhRRwcUMf0C3/pictures");
+        DatabaseReference userImageRef = mDatabase.getReference(FirebaseUtils.getUserPicturesPath(userID));
 
         userImageRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                food = new ArrayList<>();
+                foods = new ArrayList<>();
                 String date;
                 String nourriture;
                 String imgB64;
                 int i = 0;
                 for(DataSnapshot child: dataSnapshot.getChildren()){
+
                     date = child.child("date").getValue(String.class);
                     nourriture = child.child("nourriture").getValue(String.class);
                     imgB64 = child.child("picture").getValue(String.class);
-                    food.add(new Food(date, nourriture, imgB64));
+
+                    foods.add(new Food(date, nourriture, imgB64));
                     i++;
                 }
                 if (i > 0) {
                     pictures = new Bitmap[i];
                     for (int j = 0; j < i; j++) {
-                        pictures[j] = ImageUtils.convertB64ToBitmap(food.get(j).getPicture());
+                        pictures[j] = ImageUtils.convertB64ToBitmap(foods.get(j).getPicture());
                     }
 
                     updateGallery(pictures);
@@ -131,7 +134,7 @@ public class GalleryFragment extends Fragment {
     public void onResume(){
         super.onResume();
 
-        // Refresh de la gallery quand on revient de CameraActivity
+        // Gallery refresh on CameraActivity's comeback
         if(shouldRefreshOnResume){
             updateGallery(getPicturesFromFirebase());
         }

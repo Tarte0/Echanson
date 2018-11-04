@@ -109,21 +109,6 @@ public class ImageUtils {
         }
     }
 
-    public static void saveFirebase(Bitmap bitmapPicture, String date, String nourriture) {
-        mDatabase = FirebaseDatabase.getInstance();
-
-        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        userID = currentFirebaseUser.getUid();
-
-        DatabaseReference userImageRef = mDatabase.getReference("users/PfY3DNTX0ZZmpcUjLhRRwcUMf0C3/pictures");
-
-        String pictureB64 = convertBitmapToB64(bitmapPicture);
-
-        Food food = new Food(date, nourriture, pictureB64);
-
-        userImageRef.push().setValue(food);
-
-    }
 
     public static String convertBitmapToB64(Bitmap pictureBitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

@@ -27,6 +27,10 @@ import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +46,7 @@ import java.util.Vector;
 
 import stev.echanson.classes.BorderedText;
 import stev.echanson.classes.Classifier;
+import stev.echanson.classes.FirebaseUtils;
 import stev.echanson.classes.ImageUtils;
 import stev.echanson.classes.Logger;
 import stev.echanson.classes.TensorFlowImageClassifier;
@@ -212,7 +217,10 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
         ImageUtils.saveBitmap(croppedBitmap, id+".png");*/
 
         // save image on firebase
-        ImageUtils.saveFirebase(croppedBitmap, strDate, food);
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userID = currentFirebaseUser.getUid();
+
+        FirebaseUtils.saveUserImage(croppedBitmap, strDate, food, userID);
     }
 
 
