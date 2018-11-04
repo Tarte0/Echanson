@@ -3,6 +3,7 @@ package stev.echanson.activities;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mainLinearLayout;
     private Toolbar toolbar;
     private ImageButton toolbarCameraButton;
+    MenuItem prevMenuItem;
 
 
     @Override
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         final BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
+        viewPager = findViewById(R.id.viewpager);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -71,10 +74,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
 
-        viewPager = findViewById(R.id.viewpager);
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if(prevMenuItem != null){
+                    prevMenuItem.setChecked(false);
+                }
+                else {
+                    bottomNavigationView.getMenu().getItem(0).setChecked(false);
+                }
+                bottomNavigationView.getMenu().getItem(i).setChecked(true);
+                prevMenuItem = bottomNavigationView.getMenu().getItem(i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+
         setupViewPager(viewPager);
+
 
         toolbar = findViewById(R.id.mainToolbar);
         toolbarCameraButton = toolbar.findViewById(R.id.toolbarCameraIB);
