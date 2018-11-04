@@ -86,7 +86,7 @@ public class IngredientFragment extends Fragment {
     private void getIngredients() {
         FirebaseUtils fbu = new FirebaseUtils(database);
 
-        //get categories and filter them from the regimes
+        //get ingredients and filter them
         ingredients = new ArrayList<>();
 
         DatabaseReference ingredientsRef = database.getReference(FirebaseUtils.INGREDIENTS_PATH);

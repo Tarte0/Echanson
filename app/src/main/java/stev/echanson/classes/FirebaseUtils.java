@@ -69,13 +69,11 @@ public class FirebaseUtils {
         return getUserPath(userID).concat("/pictures");
     }
 
-    public static void saveUserImage(Bitmap bitmapPicture, String date, String nourriture, String userID) {
+    public static void saveUserImage(Food food, String userID) {
 
         DatabaseReference userImageRef = database.getReference(getUserPicturesPath(userID));
 
-        String pictureB64 = convertBitmapToB64(bitmapPicture);
-
-        Food food = new Food(date, nourriture, pictureB64);
+        //String pictureB64 = convertBitmapToB64(bitmapPicture);
 
         userImageRef.push().setValue(food);
 

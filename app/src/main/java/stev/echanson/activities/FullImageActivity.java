@@ -54,21 +54,6 @@ public class FullImageActivity extends AppCompatActivity {
 
         Intent i = getIntent();
 
-        /*
-        int position =  i.getExtras().getInt("id");
-        String[] pictures  = i.getExtras().getStringArray("pictures");
-
-        Bitmap[] picturesBitmap = new Bitmap[pictures.length];
-
-        for(int j =0; j < pictures.length; j++){
-            picturesBitmap[j] = ImageUtils.convertB64ToBitmap(pictures[j]);
-        }
-
-        ImageAdapter adapter = new ImageAdapter(this,picturesBitmap);
-
-        imageView.setImageBitmap(adapter.pictures[position]);
-        */
-
         // Get image infos
         String date = i.getExtras().getString("date");
         String nourritureName = i.getExtras().getString("nourriture");

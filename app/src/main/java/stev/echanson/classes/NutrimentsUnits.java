@@ -7,6 +7,14 @@ public class NutrimentsUnits {
     private String proteine;
     private String sel;
 
+    public NutrimentsUnits() {
+        this.energie = "kcal";
+        this.gras = "g";
+        this.sucre = "g";
+        this.proteine = "g";
+        this.sel = "g";
+    }
+
     public NutrimentsUnits(String energie, String gras, String sucre, String proteine, String sel) {
         this.energie = energie;
         this.gras = gras;

@@ -75,7 +75,6 @@ public abstract class CameraActivity extends Activity
     private Runnable postInferenceCallback;
     private Runnable imageConverter;
 
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         LOGGER.d("onCreate " + this);
@@ -88,8 +87,7 @@ public abstract class CameraActivity extends Activity
         cameraLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveImageOnClick(v);
-
+                    onClickEvent(v);
             }
         });
 
@@ -477,5 +475,5 @@ public abstract class CameraActivity extends Activity
 
     protected abstract Size getDesiredPreviewFrameSize();
 
-    protected abstract void saveImageOnClick(View view);
+    protected abstract void onClickEvent(View view);
 }
