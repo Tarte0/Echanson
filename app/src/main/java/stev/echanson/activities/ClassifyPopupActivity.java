@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -75,6 +74,8 @@ public class ClassifyPopupActivity extends AppCompatActivity {
     private List<String> userWarningCategories;
     private ArrayList<Ingredient> nourritureIngredients;
 
+    public static Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,14 +129,16 @@ public class ClassifyPopupActivity extends AppCompatActivity {
         userID = currentFirebaseUser.getUid();
 
         fbu = new FirebaseUtils(mDatabase);
+        context = getApplicationContext();
 
         setUp(nourritureName);
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
+        context = getApplicationContext();
         setUp(nourritureName);
+        super.onResume();
     }
 
     private void setUp(final String nourritureName) {
@@ -147,7 +150,7 @@ public class ClassifyPopupActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 distantNourriture = dataSnapshot.getValue(Nourriture.class);
-                updateViews(getApplicationContext(), distantNourriture, nourritureName);
+                fetchIngredients();
             }
 
             @Override
@@ -156,7 +159,11 @@ public class ClassifyPopupActivity extends AppCompatActivity {
             }
         });
 
-        //Fetching all ingredients
+
+    }
+
+    private void fetchIngredients() {
+//Fetching all ingredients
         DatabaseReference ingredientsRef = mDatabase.getReference(FirebaseUtils.INGREDIENTS_PATH);
         ingredientsRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -174,7 +181,8 @@ public class ClassifyPopupActivity extends AppCompatActivity {
                     ingredients.add(new Ingredient(name, categoriesOfIng));
                 }
 
-                handleWarnings(getApplicationContext());
+                updateViews(distantNourriture, nourritureName);
+                handleWarnings();
 
             }
 
@@ -183,9 +191,10 @@ public class ClassifyPopupActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
-    private void updateViews(final Context c, final Nourriture distantNourriture, final String nourritureName) {
+    private void updateViews(final Nourriture distantNourriture, final String nourritureName) {
 
         //fetching nutriments units
         DatabaseReference nutrimentsRef = mDatabase.getReference(FirebaseUtils.NUTRIMENTS_PATH);
@@ -212,6 +221,7 @@ public class ClassifyPopupActivity extends AppCompatActivity {
                     nourritureScSelValue.setText(nm.format(distantNourriture.getSel())
                             .concat(" ")
                             .concat(distantNutriments.getSel()));
+
                 }
 
             }
@@ -226,8 +236,7 @@ public class ClassifyPopupActivity extends AppCompatActivity {
     }
 
     private void handleIngredients(List<String> userWarningCategories,
-                                   List<String> userWarningIngredients,
-                                   Context c) {
+                                   List<String> userWarningIngredients) {
 
         nourritureIngredients = new ArrayList<>();
         nourritureWarningIngredients = new ArrayList<>();
@@ -275,10 +284,11 @@ public class ClassifyPopupActivity extends AppCompatActivity {
 
             okNourritureScIngredientsList.setAdapter(okIngredientsRVAdapter);
             warningNourritureScIngredientsList.setAdapter(warningIngredientsRVAdapter);
+
         }
     }
 
-    private void handleWarnings(final Context c) {
+    private void handleWarnings() {
         //fetching user's warnings
         userWarningCategories = new ArrayList<>();
 
@@ -330,8 +340,7 @@ public class ClassifyPopupActivity extends AppCompatActivity {
                     name = child.child("name").getValue(String.class);
                     userWarningIngredients.add(name);
                 }
-
-                handleIngredients(userWarningCategories, userWarningIngredients, c);
+                handleIngredients(userWarningCategories, userWarningIngredients);
             }
 
             @Override
