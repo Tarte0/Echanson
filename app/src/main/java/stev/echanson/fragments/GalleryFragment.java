@@ -92,7 +92,7 @@ public class GalleryFragment extends Fragment {
     public Bitmap[] getPicturesFromFirebase() {
         foods = new ArrayList<>();
 
-        DatabaseReference userImageRef = mDatabase.getReference(FirebaseUtils.getUserPicturesPath(userID));
+        DatabaseReference userImageRef = mDatabase.getReference(FirebaseUtils.getUserEatenFoodsPath(userID));
 
         userImageRef.addValueEventListener(new ValueEventListener() {
             @Override

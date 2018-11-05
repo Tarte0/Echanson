@@ -1,5 +1,6 @@
 package stev.echanson.classes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Nourriture {
@@ -10,12 +11,26 @@ public class Nourriture {
     private double sel = 0;
     private List<String> warnings;
 
+    public Nourriture(){
+        warnings=new ArrayList<>();
+    }
+
     public Nourriture(double energie, double gras, double sucre, double proteine, double sel) {
         this.energie = energie;
         this.gras = gras;
         this.sucre = sucre;
         this.proteine = proteine;
         this.sel = sel;
+        warnings=new ArrayList<>();
+    }
+
+    public Nourriture(double energie, double gras, double sucre, double proteine, double sel, List<String> warnings) {
+        this.energie = energie;
+        this.gras = gras;
+        this.sucre = sucre;
+        this.proteine = proteine;
+        this.sel = sel;
+        this.warnings=warnings;
     }
 
     public double getEnergie() {

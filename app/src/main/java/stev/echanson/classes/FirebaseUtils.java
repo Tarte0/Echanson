@@ -61,21 +61,17 @@ public class FirebaseUtils {
         return getUserCategoriesPath(userID).concat("/").concat(categorieName);
     }
 
+    public static String getUserEatenFoodsPath(String userID) {
+        return getUserPath(userID).concat("/eatenFoods");
+    }
+
     public String getTargetNourriturePathFromFirebase(String nourriture) {
         return NOURRITURE_PATH.concat("/").concat(nourriture);
     }
 
-    public static String getUserPicturesPath(String userID) {
-        return getUserPath(userID).concat("/pictures");
-    }
+    public void saveUserEatenFood(Food food, String userID) {
 
-    public static void saveUserImage(Bitmap bitmapPicture, String date, String nourriture, String userID) {
-
-        DatabaseReference userImageRef = database.getReference(getUserPicturesPath(userID));
-
-        String pictureB64 = convertBitmapToB64(bitmapPicture);
-
-        Food food = new Food(date, nourriture, pictureB64);
+        DatabaseReference userImageRef = database.getReference(getUserEatenFoodsPath(userID));
 
         userImageRef.push().setValue(food);
 

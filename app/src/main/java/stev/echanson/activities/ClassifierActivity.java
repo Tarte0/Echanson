@@ -15,6 +15,7 @@ package stev.echanson.activities;/*
  */
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -26,6 +27,7 @@ import android.os.SystemClock;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,6 +49,7 @@ import java.util.Vector;
 import stev.echanson.classes.BorderedText;
 import stev.echanson.classes.Classifier;
 import stev.echanson.classes.FirebaseUtils;
+import stev.echanson.classes.Food;
 import stev.echanson.classes.ImageUtils;
 import stev.echanson.classes.Logger;
 import stev.echanson.classes.TensorFlowImageClassifier;
@@ -54,6 +57,8 @@ import stev.echanson.views.OverlayView.DrawCallback;
 import stev.echanson.views.ResultsView;
 
 import stev.echanson.R;
+
+import static stev.echanson.classes.ImageUtils.convertBitmapToB64;
 
 public class ClassifierActivity extends CameraActivity implements OnImageAvailableListener {
     private static final Logger LOGGER = new Logger();
@@ -100,7 +105,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
     private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
 
-    private static List<Classifier.Recognition> results =new ArrayList<>();
+    private static List<Classifier.Recognition> results = new ArrayList<>();
 
     private Integer sensorOrientation;
     private Classifier classifier;
@@ -109,6 +114,9 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
 
     private BorderedText borderedText;
+    private boolean popUpIsRunning = false;
+    private String pictureB64;
+    private Bitmap picture;
 
 
     @Override
@@ -197,32 +205,28 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
                 });
     }
 
-    @Override
-    protected void saveImageOnClick(View view) {
-        /*Date currentDate = new Date();
-        Timestamp ts = new Timestamp(currentDate.getTime());
-        String strDate = ts.toString();*/
+    protected void onClickEvent(View v) {
+        if (results != null) {
+            if (results.size() >0) {
+                if (results.get(0) != null) {
+                    // get date
+                    long time = System.currentTimeMillis();
+                    String strDate = Long.toString(time);
 
-        // get date
-        long time = System.currentTimeMillis();
-        String strDate = Long.toString(time);
+                    // get food name
+                    String nourritureName = results.get(0).getTitle();
 
-        // get food name
-        String food = results.get(0).getTitle();
+                    Intent intent = new Intent(v.getContext(), ClassifyPopupActivity.class);
 
+                    intent.putExtra("nourritureName", nourritureName);
+                    intent.putExtra("date", strDate);
+                    intent.putExtra("pictureB64", convertBitmapToB64(croppedBitmap));
 
-        /*
-        String id = UUID.randomUUID().toString();
-        //store in bdd
-        ImageUtils.saveBitmap(croppedBitmap, id+".png");*/
-
-        // save image on firebase
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        String userID = currentFirebaseUser.getUid();
-
-        FirebaseUtils.saveUserImage(croppedBitmap, strDate, food, userID);
+                    startActivity(intent);
+                }
+            }
+        }
     }
-
 
     @Override
     public void onSetDebug(boolean debug) {
