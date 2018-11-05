@@ -70,10 +70,7 @@ public class FirebaseUtils {
     }
 
     public void saveUserEatenFood(Food food, String userID) {
-
         DatabaseReference userImageRef = database.getReference(getUserEatenFoodsPath(userID));
-
         userImageRef.push().setValue(food);
-
     }
 }

@@ -53,32 +53,33 @@ public class ChartHelper {
 
     }
 
-    public static void getBarChart2(Context context, HorizontalBarChart barChart){
+    public static void getBarChart2(Context context, HorizontalBarChart barChart,
+                                    double sucre, double sel, double gras, double proteine){
         barChart.setScaleEnabled(false);
         barChart.setTouchEnabled(false);
 
         barChart.getDescription().setEnabled(false);
 
         ArrayList<BarEntry> SucreUtilisateur = new ArrayList<>();
-        SucreUtilisateur.add(new BarEntry(0,(float)25.0));
+        SucreUtilisateur.add(new BarEntry(0,(float)sucre));
 
         ArrayList<BarEntry> SucreJournaliers = new ArrayList<>();
         SucreJournaliers.add(new BarEntry(0,(float)50.0));
 
         ArrayList<BarEntry> SelUtilisateur = new ArrayList<>();
-        SelUtilisateur.add(new BarEntry(0,(float)4.7));
+        SelUtilisateur.add(new BarEntry(0,(float)sel));
 
         ArrayList<BarEntry> SelJournaliers = new ArrayList<>();
         SelJournaliers.add(new BarEntry(0,(float)5.0));
 
         ArrayList<BarEntry> ProteineUtilisateur = new ArrayList<>();
-        ProteineUtilisateur.add(new BarEntry(0,(float)76.0));
+        ProteineUtilisateur.add(new BarEntry(0,(float)proteine));
 
         ArrayList<BarEntry> ProteineJournaliers = new ArrayList<>();
         ProteineJournaliers.add(new BarEntry(0,(float)55.0));
 
         ArrayList<BarEntry> GrasUtilisateur = new ArrayList<>();
-        GrasUtilisateur.add(new BarEntry(0,(float)83.7));
+        GrasUtilisateur.add(new BarEntry(0,(float)gras));
 
         ArrayList<BarEntry> GrasJournaliers = new ArrayList<>();
         GrasJournaliers.add(new BarEntry(0,(float)93.0));
