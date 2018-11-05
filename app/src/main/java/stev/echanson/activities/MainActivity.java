@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ImageButton toolbarCameraButton;
 
+    private  MenuItem prevMenuItem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +73,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        viewPager = findViewById(R.id.viewpager);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if(prevMenuItem != null){
+                    prevMenuItem.setChecked(false);
+                }
+                else {
+                    bottomNavigationView.getMenu().getItem(0).setChecked(false);
+                }
+                bottomNavigationView.getMenu().getItem(i).setChecked(true);
+                prevMenuItem = bottomNavigationView.getMenu().getItem(i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
 
-        viewPager = findViewById(R.id.viewpager);
+
         setupViewPager(viewPager);
 
         toolbar = findViewById(R.id.mainToolbar);
