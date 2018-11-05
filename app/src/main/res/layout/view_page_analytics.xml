@@ -5,10 +5,8 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/analyticstv"
+    <com.github.mikephil.charting.charts.HorizontalBarChart
+        android:id="@+id/bar_chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="analytics"
-        />
+        android:layout_height="match_parent" />
 </LinearLayout>
